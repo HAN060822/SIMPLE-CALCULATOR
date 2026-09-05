@@ -1,0 +1,95 @@
+/* A few variables make it easy to change the calculator's colours later. */
+:root {
+  --calculator-background: #1f2937;
+  --display-background: #f8fafc;
+  --button-background: #e5e7eb;
+  --operator-background: #f59e0b;
+  --clear-background: #ef4444;
+  --text-dark: #111827;
+  --text-light: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  align-items: center;
+  background: #e0f2fe;
+  display: flex;
+  font-family: Arial, sans-serif;
+  justify-content: center;
+  margin: 0;
+  min-height: 100vh;
+}
+
+.calculator {
+  background: var(--calculator-background);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.25);
+  padding: 20px;
+  width: min(360px, 92vw);
+}
+
+.calculator__display {
+  background: var(--display-background);
+  border: 0;
+  border-radius: 8px;
+  color: var(--text-dark);
+  font-size: 2rem;
+  margin-bottom: 16px;
+  overflow: hidden;
+  padding: 18px 14px;
+  text-align: right;
+  width: 100%;
+}
+
+.calculator__keys {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.key {
+  background: var(--button-background);
+  border: 0;
+  border-radius: 8px;
+  color: var(--text-dark);
+  cursor: pointer;
+  font-size: 1.35rem;
+  min-height: 58px;
+}
+
+.key:hover {
+  filter: brightness(0.92);
+}
+
+.key:active {
+  transform: scale(0.97);
+}
+
+.key:focus-visible {
+  outline: 3px solid #38bdf8;
+  outline-offset: 2px;
+}
+
+.key--operator,
+.key--equals {
+  background: var(--operator-background);
+  color: var(--text-light);
+}
+
+/* The equals key is tall enough to cover the two number rows beside it. */
+.key--equals {
+  grid-row: span 2;
+}
+
+.key--clear {
+  background: var(--clear-background);
+  color: var(--text-light);
+}
+
+/* The zero button uses the space of two normal buttons. */
+.key--zero {
+  grid-column: span 2;
+}
