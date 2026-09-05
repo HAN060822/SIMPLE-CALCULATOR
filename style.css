@@ -1,95 +1,128 @@
-/* A few variables make it easy to change the calculator's colours later. */
 :root {
-  --calculator-background: #1f2937;
-  --display-background: #f8fafc;
-  --button-background: #e5e7eb;
-  --operator-background: #f59e0b;
-  --clear-background: #ef4444;
-  --text-dark: #111827;
-  --text-light: #ffffff;
+  --page: #e0f2fe;
+  --card: #1f2937;
+  --display: #f8fafc;
+  --button: #e5e7eb;
+  --button-text: #111827;
+  --function: #cbd5e1;
+  --operator: #f59e0b;
+  --clear: #ef4444;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #cbd5e1;
 }
 
-* {
-  box-sizing: border-box;
+body.dark-theme {
+  --page: #0f172a;
+  --card: #111827;
+  --display: #1e293b;
+  --button: #334155;
+  --button-text: #f8fafc;
+  --function: #475569;
+  --text: #f8fafc;
+  --muted: #cbd5e1;
+  --border: #475569;
 }
+
+* { box-sizing: border-box; }
 
 body {
-  align-items: center;
-  background: #e0f2fe;
-  display: flex;
+  background: var(--page);
+  color: var(--text);
   font-family: Arial, sans-serif;
-  justify-content: center;
   margin: 0;
   min-height: 100vh;
+  padding: 24px;
 }
 
-.calculator {
-  background: var(--calculator-background);
+button { font: inherit; }
+
+.app {
+  align-items: start;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(280px, 360px) minmax(250px, 360px);
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 760px;
+}
+
+.calculator, .history {
+  background: var(--card);
   border-radius: 16px;
   box-shadow: 0 12px 30px rgba(15, 23, 42, 0.25);
   padding: 20px;
-  width: min(360px, 92vw);
+}
+
+.calculator__header, .history__header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+h1, h2 { color: #fff; margin: 0; }
+h1 { font-size: 1.25rem; }
+h2 { font-size: 1.1rem; }
+
+.theme-toggle, .history__clear, .memory-keys button {
+  background: transparent;
+  border: 1px solid #94a3b8;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  padding: 7px 9px;
 }
 
 .calculator__display {
-  background: var(--display-background);
+  background: var(--display);
   border: 0;
   border-radius: 8px;
-  color: var(--text-dark);
+  color: var(--button-text);
   font-size: 2rem;
-  margin-bottom: 16px;
+  margin: 16px 0;
   overflow: hidden;
   padding: 18px 14px;
   text-align: right;
   width: 100%;
 }
 
-.calculator__keys {
+.memory-keys, .calculator__keys {
   display: grid;
   gap: 10px;
-  grid-template-columns: repeat(4, 1fr);
 }
+
+.memory-keys { grid-template-columns: repeat(4, 1fr); margin-bottom: 10px; }
+.memory-keys button { font-size: 0.85rem; }
+.calculator__keys { grid-template-columns: repeat(4, 1fr); }
 
 .key {
-  background: var(--button-background);
+  background: var(--button);
   border: 0;
   border-radius: 8px;
-  color: var(--text-dark);
+  color: var(--button-text);
   cursor: pointer;
-  font-size: 1.35rem;
-  min-height: 58px;
+  font-size: 1.25rem;
+  min-height: 54px;
 }
 
-.key:hover {
-  filter: brightness(0.92);
-}
+.key--operator, .key--equals { background: var(--operator); color: #fff; }
+.key--function { background: var(--function); }
+.key--clear { background: var(--clear); color: #fff; }
+.key--equals { grid-row: span 4; }
+.key--zero { grid-column: span 2; }
 
-.key:active {
-  transform: scale(0.97);
-}
+button:hover { filter: brightness(0.92); }
+button:active { transform: scale(0.97); }
+button:focus-visible { outline: 3px solid #38bdf8; outline-offset: 2px; }
 
-.key:focus-visible {
-  outline: 3px solid #38bdf8;
-  outline-offset: 2px;
-}
+.history { background: var(--display); min-height: 180px; }
+.history h2 { color: var(--text); }
+.history__clear { border-color: var(--border); color: var(--text); font-size: 0.8rem; }
+.history__list { color: var(--text); margin: 16px 0 0; padding-left: 24px; }
+.history__list li { border-bottom: 1px solid var(--border); padding: 9px 0; word-break: break-word; }
+.history__empty { color: var(--muted); line-height: 1.5; margin: 16px 0 0; }
 
-.key--operator,
-.key--equals {
-  background: var(--operator-background);
-  color: var(--text-light);
-}
-
-/* The equals key is tall enough to cover the two number rows beside it. */
-.key--equals {
-  grid-row: span 2;
-}
-
-.key--clear {
-  background: var(--clear-background);
-  color: var(--text-light);
-}
-
-/* The zero button uses the space of two normal buttons. */
-.key--zero {
-  grid-column: span 2;
+@media (max-width: 680px) {
+  body { padding: 16px; }
+  .app { grid-template-columns: minmax(280px, 360px); }
 }
