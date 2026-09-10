@@ -3,37 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A beginner-friendly calculator made with HTML, CSS, and JavaScript.">
   <title>Simple Calculator</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="calculator" aria-label="Simple calculator">
-    <!-- The display starts at zero and is updated by script.js. -->
-    <input class="calculator__display" type="text" value="0" aria-label="Calculator display" readonly>
+  <main class="app">
+    <section class="calculator" aria-label="Calculator">
+      <div class="calculator__header">
+        <h1>Calculator</h1>
+        <button class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch theme">☾</button>
+      </div>
 
-    <div class="calculator__keys">
-      <button class="key key--clear" type="button" data-action="clear">C</button>
-      <button class="key key--operator" type="button" data-action="operator" data-value="/">÷</button>
-      <button class="key key--operator" type="button" data-action="operator" data-value="*">×</button>
-      <button class="key key--operator" type="button" data-action="operator" data-value="-">−</button>
+      <!-- JavaScript updates this read-only field after every action. -->
+      <input class="calculator__display" type="text" value="0" aria-label="Calculator display" readonly>
 
-      <button class="key" type="button" data-action="number" data-value="7">7</button>
-      <button class="key" type="button" data-action="number" data-value="8">8</button>
-      <button class="key" type="button" data-action="number" data-value="9">9</button>
-      <button class="key key--operator" type="button" data-action="operator" data-value="+">+</button>
+      <div class="memory-keys" aria-label="Memory controls">
+        <button type="button" data-memory="clear">MC</button>
+        <button type="button" data-memory="recall">MR</button>
+        <button type="button" data-memory="add">M+</button>
+        <button type="button" data-memory="subtract">M−</button>
+      </div>
 
-      <button class="key" type="button" data-action="number" data-value="4">4</button>
-      <button class="key" type="button" data-action="number" data-value="5">5</button>
-      <button class="key" type="button" data-action="number" data-value="6">6</button>
-      <button class="key key--equals" type="button" data-action="equals">=</button>
+      <div class="calculator__keys">
+        <button class="key key--clear" type="button" data-action="clear">C</button>
+        <button class="key key--function" type="button" data-action="sqrt">√</button>
+        <button class="key key--function" type="button" data-action="operator" data-value="^">xʸ</button>
+        <button class="key key--function" type="button" data-action="percent">%</button>
 
-      <button class="key" type="button" data-action="number" data-value="1">1</button>
-      <button class="key" type="button" data-action="number" data-value="2">2</button>
-      <button class="key" type="button" data-action="number" data-value="3">3</button>
+        <button class="key key--operator" type="button" data-action="operator" data-value="/">÷</button>
+        <button class="key key--operator" type="button" data-action="operator" data-value="*">×</button>
+        <button class="key key--operator" type="button" data-action="operator" data-value="-">−</button>
+        <button class="key key--operator" type="button" data-action="operator" data-value="+">+</button>
 
-      <button class="key key--zero" type="button" data-action="number" data-value="0">0</button>
-      <button class="key" type="button" data-action="decimal">.</button>
-    </div>
+        <button class="key" type="button" data-action="number" data-value="7">7</button>
+        <button class="key" type="button" data-action="number" data-value="8">8</button>
+        <button class="key" type="button" data-action="number" data-value="9">9</button>
+        <button class="key key--equals" type="button" data-action="equals">=</button>
+
+        <button class="key" type="button" data-action="number" data-value="4">4</button>
+        <button class="key" type="button" data-action="number" data-value="5">5</button>
+        <button class="key" type="button" data-action="number" data-value="6">6</button>
+
+        <button class="key" type="button" data-action="number" data-value="1">1</button>
+        <button class="key" type="button" data-action="number" data-value="2">2</button>
+        <button class="key" type="button" data-action="number" data-value="3">3</button>
+
+        <button class="key key--zero" type="button" data-action="number" data-value="0">0</button>
+        <button class="key" type="button" data-action="decimal">.</button>
+      </div>
+    </section>
+
+    <aside class="history" aria-label="Calculation history">
+      <div class="history__header">
+        <h2>History</h2>
+        <button class="history__clear" type="button">Clear history</button>
+      </div>
+      <ol class="history__list" aria-live="polite"></ol>
+      <p class="history__empty">Your completed calculations will appear here.</p>
+    </aside>
   </main>
 
   <script src="script.js"></script>
